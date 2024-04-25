@@ -40,20 +40,20 @@
                                                 <span class="text-danger name"></span>
                                         </div>
                                     </div>
-                                    <div class="col-xl-6">
+                                    {{-- <div class="col-xl-6">
                                         <div class="form-group">
                                             <label class="form-label">Upload Image</label>
                                             <input type="file" name="images"   class="form-control"
                                                 placeholder="name" >
                                                 <span class="text-danger name"></span>
                                         </div>
-                                    </div>
-                                    <div class="col-xl-6">
+                                    </div> --}}
+                                    {{-- <div class="col-xl-6">
                                         <div class="form-group">
                                             <label class="form-label">Discription</label>
                                             <textarea name="content" required>{{$service->content}}</textarea>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                     <button  type="submit" class="btn btn-primary w-25 float-end">Update</button>
                             </form>

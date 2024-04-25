@@ -14,17 +14,16 @@
   <div class="services ">
     <div class="container">
       <div class="row">
-        @foreach ($service as $item)
-        <div class="col-md-3">
-          <div class="position-relative">
-            <img
-              src="{{$item->images}}"
-              alt="road"
-              class="w-100"
-            />
-            <div class="position-absolute meet-executive-name">
-              <p class="mb-0">{!! $item->content !!}</p>
-            </div>
+        @foreach ($service_details as $item)
+        <div class="col-md-4">
+          <br />
+          <div class="card">
+            @if(!empty($item->servicedetails[0]->images))
+            <img src="{{asset($item->servicedetails[0]->images)}}" class="card-img-top" alt="..." />
+            @endif
+            <a href="{{route('service-details',[$item->id])}}" style="text-decoration: none">
+                <div class="card-body custombody">{!! $item->title !!}</div>
+             </a>
           </div>
         </div>
         @endforeach

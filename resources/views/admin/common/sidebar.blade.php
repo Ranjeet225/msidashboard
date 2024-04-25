@@ -54,13 +54,19 @@
                             request()->routeIs('store.success') ||
                             request()->routeIs('edit.success') ||
                             request()->routeIs('show.success');
+            $isActiveIdoelogy = request()->routeIs('create.idoelogy') ||
+                                request()->routeIs('store.idoelogy') ||
+                                request()->routeIs('edit.idoelogy') ||
+                                request()->routeIs('show.idoelogy');
            @endphp
-            <li @if ($isActiveSlider) class="mm-active" @endif>
+            <li @if ($isActiveSlider || $isActiveIdoelogy || $isActiveSupport || $isActiveSuccess || $isActiveAbout || $isActiveService || $isActiveProject || $isActiveClient || $isActiveTestimonial || $isActiveGallery || $isActiveCarrier ||  $isActiveTeams)
+             class="mm-active" @endif>
                 <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                     <i class="flaticon-381-blueprint"></i>
                     <span class="nav-text">Home Master</span>
                 </a>
-                <ul aria-expanded="false" @if ($isActiveSlider || $isActiveSupport || $isActiveSuccess || $isActiveAbout || $isActiveService || $isActiveProject || $isActiveClient || $isActiveTestimonial || $isActiveGallery || $isActiveCarrier ||  $isActiveTeams) class="mm-active mm-collapse mm-show" @endif>
+                <ul aria-expanded="false" @if ($isActiveSlider || $isActiveSupport || $isActiveIdoelogy || $isActiveSuccess || $isActiveAbout || $isActiveService || $isActiveProject || $isActiveClient || $isActiveTestimonial || $isActiveGallery || $isActiveCarrier ||
+                $isActiveTeams) class="mm-active mm-collapse mm-show" @endif>
                     <li @if ($isActiveSlider) class="mm-active" @endif> <a href="{{ url('admin/slider') }}"> Slider</a></li>
                     <li  @if ($isActiveSupport) class="mm-active" @endif><a href="{{ url('admin/support') }}">Support</a></li>
                     <li  @if ($isActiveAbout) class="mm-active" @endif><a href="{{ url('admin/about') }}">About</a></li>
@@ -72,15 +78,32 @@
                     <li @if ($isActiveCarrier) class="mm-active" @endif><a href="{{ url('admin/carrier') }}">Carrier</a></li>
                     <li @if ($isActiveTeams) class="mm-active" @endif><a href="{{ url('admin/teams') }}">Teams</a></li>
                     <li @if ($isActiveSuccess) class="mm-active" @endif><a href="{{ url('admin/success') }}">Success</a></li>
+                    <li @if ($isActiveIdoelogy) class="mm-active" @endif><a href="{{ url('admin/ideology') }}">IDOELOGY</a></li>
                 </ul>
             </li>
-            <li >
+            @php
+            $isActiveServiceDetials=request()->routeIs('create.service-details') ||
+                                    request()->routeIs('store.service-details') ||
+                                    request()->routeIs('edit.service-details') ||
+                                    request()->routeIs('show.service-details');
+            $isActiveProjectDetials=request()->routeIs('create.project-details') ||
+                                    request()->routeIs('store.project-details') ||
+                                    request()->routeIs('edit.project-details') ||
+                                    request()->routeIs('show.project-details');
+            $isActiveIdoelogyDetials=request()->routeIs('create.ideology-details') ||
+                                    request()->routeIs('store.ideology-details') ||
+                                    request()->routeIs('edit.ideology-details') ||
+                                    request()->routeIs('show.ideology-details');
+            @endphp
+            <li  @if($isActiveServiceDetials || $isActiveProjectDetials || $isActiveIdoelogyDetials) class="mm-active" @endif>
                 <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                     <i class="flaticon-381-add"></i>
                     <span class="nav-text">Menu Details</span>
                 </a>
-                <ul aria-expanded="false">
-                    <li ><a href="{{ url('admin/service-details') }}">Service Details</a></li>
+                <ul aria-expanded="false" @if($isActiveServiceDetials || $isActiveProjectDetials || $isActiveIdoelogyDetials)  class="mm-active mm-collapse mm-show" @endif>
+                    <li ><a href="{{ url('admin/service-details') }}" @if ($isActiveServiceDetials) class="mm-active" @endif>Service Details</a></li>
+                    <li ><a href="{{ url('admin/project-details') }}" @if ($isActiveProjectDetials) class="mm-active" @endif>Project Details</a></li>
+                    <li ><a href="{{ url('admin/ideology-details') }}" @if ($isActiveIdoelogyDetials) class="mm-active" @endif>Ideology Details</a></li>
                 </ul>
             </li>
          </ul>

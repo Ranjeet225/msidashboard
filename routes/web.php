@@ -4,15 +4,21 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MenuDetailsController;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get("/service",[HomeController::class,'service'])->name('service');
+Route::get("/projects",[HomeController::class,'project'])->name('project');
 Route::get("/clients",[HomeController::class,'clients'])->name('clients');
+Route::get("/ideology",[HomeController::class,'ideology'])->name('ideology');
 Route::get("/teams",[HomeController::class,'teams'])->name('teams');
 Route::get("/login",[AdminController::class,'index'])->name('admin');
 Route::get("/logoutadmin",[AdminController::class,'logoutadmin'])->name('logoutadmin');
 Route::post("adminlogin",[AdminController::class,'adminlogin'])->name('adminlogin');
+Route::get("project-details/{id}",[HomeController::class,'ProjectDetails'])->name('project-details');
+Route::get("service-details/{id}",[HomeController::class,'ServiceDetails'])->name('service-details');
+Route::get("ideology-details/{id}",[HomeController::class,'IdeologyDetails'])->name('ideology-details');
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get("/dashboard",[AdminController::class,'dashboard'])->name('admin.dashboard');
@@ -115,6 +121,42 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get("show/success/{id}",[DashboardController::class,'showSuccess'])->name('show.success');
     Route::post("update/success/{id}",[DashboardController::class,'updateSuccess'])->name('update.success');
     Route::get("delete/success/{id}",[DashboardController::class,'deleteSuccess'])->name('delete.success');
+
+    // service Details
+    Route::get("service-details",[MenuDetailsController::class,'getServiceDetails'])->name('getServiceDetails');
+    Route::get("create/service-details",[MenuDetailsController::class,'createServiceDetails'])->name('create.service-details');
+    Route::post("service-details/store",[MenuDetailsController::class,'storeServiceDetails'])->name('store.service-details');
+    Route::get("edit/service-details/{id}",[MenuDetailsController::class,'editServiceDetails'])->name('edit.service-details');
+    Route::get("show/service-details/{id}",[MenuDetailsController::class,'showServiceDetails'])->name('show.service-details');
+    Route::post("update/service-details/{id}",[MenuDetailsController::class,'updateServiceDetails'])->name('update.service-details');
+    Route::get("delete/service-details/{id}",[MenuDetailsController::class,'deleteServiceDetails'])->name('delete.service-details');
+    // project Details
+    Route::get("project-details",[MenuDetailsController::class,'getProjectDetails'])->name('getProjectDetails');
+    Route::get("create/project-details",[MenuDetailsController::class,'createProjectDetails'])->name('create.project-details');
+    Route::post("project-details/store",[MenuDetailsController::class,'storeProjectDetails'])->name('store.project-details');
+    Route::get("edit/project-details/{id}",[MenuDetailsController::class,'editProjectDetails'])->name('edit.project-details');
+    Route::get("show/project-details/{id}",[MenuDetailsController::class,'showProjectDetails'])->name('show.project-details');
+    Route::post("update/project-details/{id}",[MenuDetailsController::class,'updateProjectDetails'])->name('update.project-details');
+    Route::get("delete/project-details/{id}",[MenuDetailsController::class,'deleteProjectDetails'])->name('delete.project-details');
+
+    // ideology
+    Route::get("ideology",[DashboardController::class,'getIdeology'])->name('getIdeology');
+    Route::get("create/ideology",[DashboardController::class,'createIdeology'])->name('create.ideology');
+    Route::post("store/ideology",[DashboardController::class,'storeIdeology'])->name('store.ideology');
+    Route::get("edit/ideology/{id}", [DashboardController::class, 'editIdeology'])->name('edit.ideology');
+    Route::post("update/ideology/{id}",[DashboardController::class,'updateIdeology'])->name('update.ideology');
+    Route::get("delete/ideology/{id}",[DashboardController::class,'deleteIdeology'])->name('delete.ideology');
+
+    // ideology details
+
+    Route::get("ideology-details",[MenuDetailsController::class,'getIdeologyDetails'])->name('getIdeologyDetails');
+    Route::get("create/ideology-details",[MenuDetailsController::class,'createIdeologyDetails'])->name('create.ideology-details');
+    Route::post("ideology-details/store",[MenuDetailsController::class,'storeIdeologyDetails'])->name('store.ideology-details');
+    Route::get("edit/ideology-details/{id}",[MenuDetailsController::class,'editIdeologyDetails'])->name('edit.ideology-details');
+    Route::get("show/ideology-details/{id}",[MenuDetailsController::class,'showIdeologyDetails'])->name('show.ideology-details');
+    Route::post("update/ideology-details/{id}",[MenuDetailsController::class,'updateIdeologyDetails'])->name('update.ideology-details');
+    Route::get("delete/ideology-details/{id}",[MenuDetailsController::class,'deleteIdeologyDetails'])->name('delete.ideology-details');
+
 });
 
 

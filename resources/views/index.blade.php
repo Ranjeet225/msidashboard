@@ -143,6 +143,7 @@
         @endforeach
     </div>
   </div>
+  {{-- our service --}}
   <div class="short-descrive mb-5">
     <div class="container">
       <div class="row">
@@ -165,8 +166,12 @@
         <div class="col-md-4">
           <br />
           <div class="card">
-            <img src="{{asset($item->images)}}" class="card-img-top" alt="..." />
-            <div class="card-body custombody">{!! $item->content !!}</div>
+            @if(!empty($item->servicedetails[0]->images))
+            <img src="{{asset($item->servicedetails[0]->images)}}" class="card-img-top" alt="..." />
+            @endif
+            <a href="{{route('service-details',[$item->id])}}" style="text-decoration: none">
+                <div class="card-body custombody">{!! $item->title !!}</div>
+             </a>
           </div>
         </div>
         @endforeach
@@ -174,7 +179,8 @@
     </div>
   </div>
 
-  {{-- <div class="short-descrive mb-5">
+   {{-- our project  --}}
+   <div class="short-descrive mb-5">
     <div class="container">
       <div class="row">
 
@@ -182,20 +188,29 @@
 
         <div class="col-md-6">
           <div class="cntr" style="text-align: center">
-            <div>
-              <h2>Our Services</h2>
-            </div>
             <div class="short-descrive-left-btn">
-              <h1 class="company_name">We Provide Services</h1>
-            </div>
+                <h1 class="company_name">Our Projects</h1>
+              </div>
           </div>
         </div>
 
         <div class="col-md-3"></div>
-
+        @foreach ($project_details as $item)
+        <div class="col-md-4 ">
+          <br />
+          <div class="card">
+            @if(!empty($item->projectdetails[0]->images))
+            <img src="{{asset($item->projectdetails[0]->images)}}" class="card-img-top" alt="..." />
+            @endif
+            <a href="{{route('project-details',[$item->id])}}" style="text-decoration: none">
+                <div class="card-body custombody">{!! $item->title !!}</div>
+             </a>
+          </div>
+        </div>
+        @endforeach
       </div>
     </div>
-  </div> --}}
+  </div>
 
   <div class="short-descrive mb-5" style="background: #fdbe33">
     <div class="container-fluid">

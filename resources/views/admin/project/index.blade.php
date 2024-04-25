@@ -32,7 +32,7 @@
                                     <thead>
                                         <tr>
                                             <th>S.No</th>
-                                            <th>Content</th>
+                                            <th>Title</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
@@ -45,7 +45,7 @@
                                         @foreach ($project as $item)
                                             <tr>
                                                 <td>{{ $i }}</td>
-                                                <td>{!! $item->content !!}</td>
+                                                <td>{{$item->title }}</td>
                                                 <td class="text-nowrap">
                                                     <a title="Edit" href="{{ route('edit.project',[$item->id]) }}" class="btn btn-warning btn-sm content-icon">
                                                         <i class="fa fa-edit"></i>

@@ -33,18 +33,20 @@
                                 <div class="row">
                                     <div class="col-xl-6">
                                         <div class="form-group">
-                                            <label class="form-label">Content</label>
-                                            <textarea name="content" required>{{$project->content}}</textarea>
+                                            <label class="form-label">Title</label>
+                                            <input type="text" name="title" value="{{$project->title}}"  class="form-control"
+                                                placeholder="title" >
+                                                <span class="text-danger name"></span>
                                         </div>
                                     </div>
-                                    <div class="col-xl-6">
+                                    {{-- <div class="col-xl-6">
                                         <div class="form-group">
                                             <label class="form-label">Upload Image</label>
                                             <input type="file" name="images"   class="form-control"
                                                 placeholder="name" >
                                                 <span class="text-danger name"></span>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                     <button  type="submit" class="btn btn-primary w-25 float-end">Update</button>
                             </form>

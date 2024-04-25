@@ -11,7 +11,7 @@
             <div class="col-xl-12">
 
                 <div class="mb-3">
-                    <a href="{{route('create.carrierSER')}}"
+                    <a href="{{route('create.carrier')}}"
                         class="btn btn-primary btn-sm">Add Carrier</a>
                 </div>
                 <div class="filter cm-content-box box-primary">
@@ -41,18 +41,18 @@
                                         @php
                                             $i = 1;
                                         @endphp
-                                        @if ($carrierSER->count() > 0)
-                                        @foreach ($carrierSER as $item)
+                                        @if ($carrier->count() > 0)
+                                        @foreach ($carrier as $item)
                                             <tr>
                                                 <td>{{ $i }}</td>
                                                 <td>{!! $item->content !!}</td>
                                                 <td class="text-nowrap">
-                                                    <a title="Edit" href="{{ route('edit.carrierSER',[$item->id]) }}" class="btn btn-warning btn-sm content-icon">
+                                                    <a title="Edit" href="{{ route('edit.carrier',[$item->id]) }}" class="btn btn-warning btn-sm content-icon">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                 </td>
                                                 <td class="text-nowrap">
-                                                    <a title="Delete" href="{{ route('delete.carrierSER',[$item->id]) }}" class="btn btn-warning btn-sm content-icon">
+                                                    <a title="Delete" href="{{ route('delete.carrier',[$item->id]) }}" class="btn btn-warning btn-sm content-icon">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
                                                 </td>
@@ -73,21 +73,21 @@
                                     <nav aria-label="Page navigation example mb-2">
                                         <ul class="pagination mb-2 mb-sm-0">
                                             <li class="page-item">
-                                                <a class="page-link" href="{{ $carrierSER->previousPageUrl() }}">
+                                                <a class="page-link" href="{{ $carrier->previousPageUrl() }}">
                                                     <i class="fa-solid fa-angle-left"></i>
                                                 </a>
                                             </li>
 
                                             <!-- Display each page link -->
-                                            @for ($i = 1; $i <= $carrierSER->lastPage(); $i++)
-                                                <li class="page-item {{ $carrierSER->currentPage() == $i ? 'active' : '' }}">
+                                            @for ($i = 1; $i <= $carrier->lastPage(); $i++)
+                                                <li class="page-item {{ $carrier->currentPage() == $i ? 'active' : '' }}">
                                                     <a class="page-link"
-                                                        href="{{ $carrierSER->url($i) }}">{{ $i }}</a>
+                                                        href="{{ $carrier->url($i) }}">{{ $i }}</a>
                                                 </li>
                                             @endfor
 
                                             <li class="page-item">
-                                                <a class="page-link" href="{{ $carrierSER->nextPageUrl() }}">
+                                                <a class="page-link" href="{{ $carrier->nextPageUrl() }}">
                                                     <i class="fa-solid fa-angle-right"></i>
                                                 </a>
                                             </li>

@@ -33,7 +33,6 @@
                                         <tr>
                                             <th>S.No</th>
                                             <th>Title</th>
-                                            <th>Content</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
@@ -47,7 +46,6 @@
                                             <tr>
                                                 <td>{{ $i }}</td>
                                                 <td>{{ $item->title }}</td>
-                                                <td>{!! $item->content !!}</td>
                                                 <td class="text-nowrap">
                                                     <a title="Edit" href="{{ route('edit.service',[$item->id]) }}" class="btn btn-warning btn-sm content-icon">
                                                         <i class="fa fa-edit"></i>
@@ -65,7 +63,7 @@
                                         @endforeach
                                         @else
                                             <tr>
-                                                <td colspan="8">Data Not Found!</td>
+                                                <td colspan="4">Data Not Found!</td>
                                             </tr>
                                         @endif
                                     </tbody>

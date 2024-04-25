@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MSIL</title>
     <link href="{{asset('frontend/assets/css/bootstrap.min.css')}}" rel="stylesheet" />
-    <script src="{{asset('frontend/assets/js/bootstrap.bundle.min.js')}}"></script>
+    {{-- <script src="{{asset('frontend/assets/js/bootstrap.bundle.min.js')}}"></script> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -168,15 +168,67 @@
                             <li class="nav-item px-3 me-2  @if (request()->routeIs('about')) active @endif">
                                 <a class="nav-link" href="{{url('/about')}}">ABOUT</a>
                             </li>
-                            <li class="nav-item px-3 me-2 @if (request()->routeIs('service')) active @endif">
+                            {{-- <li class="nav-item px-3 me-2 @if (request()->routeIs('service')  || request()->routeIs('service-details')) active @endif">
                                 <a class="nav-link" href="{{route('service')}}">SERVICE</a>
+                            </li> --}}
+                            <li class="nav-item dropdown @if (request()->routeIs('service')  || request()->routeIs('service-details')) active @endif">
+                                <a
+                                  class="nav-link dropdown-toggle"
+                                  href=""
+                                  id="navbarDropdown"
+                                  role="button"
+                                  data-bs-toggle="dropdown"
+                                  aria-expanded="false"
+                                >
+                                  SERVICES
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    @foreach ($submenuservice as $item)
+                                      <li><a class="dropdown-item" href="{{url('service-details/')}}/{{$item->id}}">{{ Str::ucfirst($item->title) }}</a></li>
+                                    @endforeach
+                                </ul>
                             </li>
-                            <li class="nav-item px-3 me-2 @if (request()->routeIs('team')) active @endif">
+                            <li class="nav-item dropdown @if (request()->routeIs('ideology')  || request()->routeIs('ideology-details')) active @endif">
+                                <a
+                                  class="nav-link dropdown-toggle"
+                                  href=""
+                                  id="navbarDropdown"
+                                  role="button"
+                                  data-bs-toggle="dropdown"
+                                  aria-expanded="false"
+                                >
+                                  IDEOLOGY
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    @foreach ($submenuideology as $item)
+                                      <li><a class="dropdown-item" href="{{url('ideology-details/')}}/{{$item->id}}">{{ Str::ucfirst($item->title) }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
+
+                            <li class="nav-item px-3 me-2 @if (request()->routeIs('teams')) active @endif">
                                 <a class="nav-link" aria-current="page" href="{{route('teams')}}">TEAM</a>
                             </li>
-                            <li class="nav-item px-3 me-2">
-                                <a class="nav-link" href="#">PROJECT</a>
+                            <li class="nav-item dropdown @if (request()->routeIs('project')  || request()->routeIs('project-details')) active @endif">
+                                <a
+                                  class="nav-link dropdown-toggle"
+                                  href="#"
+                                  id="navbarDropdown"
+                                  role="button"
+                                  data-bs-toggle="dropdown"
+                                  aria-expanded="false"
+                                >
+                                  Projects
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  @foreach ($submenuproject as $item)
+                                    <li><a class="dropdown-item" href="{{url('project-details/')}}/{{$item->id}}">{{ Str::ucfirst($item->title) }}</a></li>
+                                  @endforeach
+                                </ul>
                             </li>
+                            {{-- <li class="nav-item px-3 me-2 @if (request()->routeIs('project') || request()->routeIs('project-details')) active @endif">
+                                <a class="nav-link" href="{{url('projects')}}">PROJECT</a>
+                            </li> --}}
                             <li class="nav-item px-3 me-2 @if (request()->routeIs('clients')) active @endif">
                                 <a class="nav-link" href="{{route('clients')}}">CLIENTS</a>
                             </li>
@@ -239,40 +291,39 @@
                                 <a href="{{url('/')}}">Home</a>
                             </li>
                             <li>
-                                <a href="#">About Us</a>
+                                <a href="{{url('/about')}}">About Us</a>
                             </li>
                             <li>
-                                <a href="#">Projects</a>
+                                <a href="{{url('/project')}}">Projects</a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="#">Contact Us</a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                     <div class="col-md-3">
                         <h2>Services</h2>
-                        <p class="mt-2">
+                        <ul class="mt-2">
+                        @foreach ($submenuservice as $item)
+                            <li><a class="dropdown-item" href="{{url('service-details/')}}/{{$item->id}}">{{ Str::ucfirst($item->title) }}</a></li>
+                        @endforeach
+                        </ul>
+                        {{-- <p class="mt-2">
                             Highways, Roads & Bridges Road Construction Building
                             Construction Smart Cities & TOwnships
-                        </p>
+                        </p> --}}
                     </div>
                     <div class="col-md-3">
                         <h2>Ideology</h2>
                         <ul>
-                            <li>
-                                <a href="#">Quality</a>
-                            </li>
-                            <li>
-                                <a href="#">Safety</a>
-                            </li>
-                            <li>
-                                <a href="#">Sustainbility</a>
-                            </li>
+                            @foreach ($submenuideology as $item)
+                            <li><a class="dropdown-item" href="{{url('ideology-details/')}}/{{$item->id}}">{{ Str::ucfirst($item->title) }}</a></li>
+                          @endforeach
                         </ul>
                     </div>
                     <div class="col-md-3">
                         <h2>Contact Us</h2>
-                        <address class="mt-2">
+                        <address class="mt-2" style="font-size: 13px">
                             Address: Khapuria, Madhupatna, Cuttack-753010 Odisha, India
                             <br />
                             Telephone: + 91-671-2344761/62/63 <br />
@@ -289,6 +340,11 @@
     </div>
 
     <script src="{{asset('frontend/assets/js/jquery.min.js')}}"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+    crossorigin="anonymous"
+  ></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
     </script>
@@ -296,7 +352,7 @@
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
     </script>
 
-    <!-- <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
+    <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script>
         $(".your-class").slick({
             dots: false,

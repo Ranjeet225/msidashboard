@@ -15,9 +15,11 @@ use App\Models\Client;
 use App\Models\Gallery;
 use App\Models\Success;
 use App\Models\Team;
+use App\Models\Ideology;
 use App\Models\Testimonial;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+
 
 
 class DashboardController extends Controller
@@ -33,13 +35,10 @@ class DashboardController extends Controller
         $slider = Slider::with('images')->paginate(10);
         return view('admin.slider.index', compact('slider'));
     }
-
     public function createSlider()
     {
         return view('admin.slider.create');
     }
-
-
     public function storeSlider(Request $request)
     {
         $slider = Slider::create([
@@ -73,7 +72,6 @@ class DashboardController extends Controller
         $slider = Slider::find($id);
         return view('admin.slider.edit', compact('slider'));
     }
-
     public function updateSlider(Request $request, $id)
     {
         $slider = Slider::findOrFail($id);
@@ -102,7 +100,6 @@ class DashboardController extends Controller
         }
         return redirect()->route('getSlider')->with('success', 'Slider updated successfully.');
     }
-
     public function updateSliderStatus(Request $request)
     {
         $sliderId = $request->input('slider_id');
@@ -110,7 +107,6 @@ class DashboardController extends Controller
         DB::table('sliders')->where('id', $sliderId)->update(['status' => '1']);
         return response()->json(['message' => 'Status updated successfully']);
     }
-
     public function deleteSlider($id)
     {
         $slider = Slider::find($id);
@@ -182,7 +178,6 @@ class DashboardController extends Controller
         $support->update($data);
         return redirect()->route('getSupport')->with('success', 'Support updated successfully.');
     }
-
     public function deleteSupport($id)
     {
         $Support = Support::find($id);
@@ -200,7 +195,6 @@ class DashboardController extends Controller
             return redirect()->route('getSupport')->with('error', 'Failed to delete Slider.');
         }
     }
-
     // about
     public function getAbout()
     {
@@ -283,15 +277,14 @@ class DashboardController extends Controller
     public function storeService(Request $request)
     {
         $data = [
-            'content' => $request->content,
             'title' => $request->title,
         ];
-        if ($request->hasFile('images')) {
-            $images = $request->file('images');
-            $imageName = time() . '_' . $images->getClientOriginalName();
-            $data['images'] = 'admin/assets/service/' . $imageName;
-            $images->move(public_path('admin/assets/service'), $imageName);
-        }
+        // if ($request->hasFile('images')) {
+        //     $images = $request->file('images');
+        //     $imageName = time() . '_' . $images->getClientOriginalName();
+        //     $data['images'] = 'admin/assets/service/' . $imageName;
+        //     $images->move(public_path('admin/assets/service'), $imageName);
+        // }
         Service::create($data);
         return redirect()->route('getService')->with('success', 'Service added successfully.');
     }
@@ -304,20 +297,19 @@ class DashboardController extends Controller
     {
         $support = Service::findOrFail($id);
         $data = [
-            'content' => $request->content,
             'title' => $request->title,
         ];
-        if ($request->hasFile('images')) {
-            $oldImagePath = public_path($support->image_path);
-            if (file_exists($oldImagePath)) {
-                unlink($oldImagePath);
-            }
-            $uploadedImage = $request->file('images');
-            $imageName = time() . '_' . $uploadedImage->getClientOriginalName();
-            $imagePath = 'admin/assets/service/' . $imageName;
-            $uploadedImage->move(public_path('admin/assets/service'), $imageName);
-            $data['images'] = $imagePath;
-        }
+        // if ($request->hasFile('images')) {
+        //     $oldImagePath = public_path($support->image_path);
+        //     if (file_exists($oldImagePath)) {
+        //         unlink($oldImagePath);
+        //     }
+        //     $uploadedImage = $request->file('images');
+        //     $imageName = time() . '_' . $uploadedImage->getClientOriginalName();
+        //     $imagePath = 'admin/assets/service/' . $imageName;
+        //     $uploadedImage->move(public_path('admin/assets/service'), $imageName);
+        //     $data['images'] = $imagePath;
+        // }
         $support->update($data);
         return redirect()->route('getService')->with('success', 'Service updated successfully.');
     }
@@ -327,10 +319,10 @@ class DashboardController extends Controller
         if (!$Service) {
             return redirect()->route('getService')->with('error', 'Service not found.');
         }
-        $imagePath = public_path($Service->filepath);
-        if (File::exists($imagePath)) {
-            File::delete($imagePath);
-        }
+        // $imagePath = public_path($Service->filepath);
+        // if (File::exists($imagePath)) {
+        //     File::delete($imagePath);
+        // }
         $deleted = $Service->delete();
         if ($deleted) {
             return redirect()->route('getService')->with('success', 'Service deleted successfully.');
@@ -352,14 +344,8 @@ class DashboardController extends Controller
     public function storeProject(Request $request)
     {
         $data = [
-            'content' => $request->content,
+            'title' => $request->title,
         ];
-        if ($request->hasFile('images')) {
-            $images = $request->file('images');
-            $imageName = time() . '_' . $images->getClientOriginalName();
-            $data['images'] = 'admin/assets/project/' . $imageName;
-            $images->move(public_path('admin/assets/project'), $imageName);
-        }
         Project::create($data);
         return redirect()->route('getProject')->with('success', 'Project added successfully.');
     }
@@ -372,19 +358,8 @@ class DashboardController extends Controller
     {
         $support = Project::findOrFail($id);
         $data = [
-            'content' => $request->content,
+            'title' => $request->title,
         ];
-        if ($request->hasFile('images')) {
-            $oldImagePath = public_path($support->image_path);
-            if (file_exists($oldImagePath)) {
-                unlink($oldImagePath);
-            }
-            $uploadedImage = $request->file('images');
-            $imageName = time() . '_' . $uploadedImage->getClientOriginalName();
-            $imagePath = 'admin/assets/project/' . $imageName;
-            $uploadedImage->move(public_path('admin/assets/project'), $imageName);
-            $data['images'] = $imagePath;
-        }
         $support->update($data);
         return redirect()->route('getProject')->with('success', 'Project updated successfully.');
     }
@@ -393,10 +368,6 @@ class DashboardController extends Controller
         $project = Project::find($id);
         if (!$project) {
             return redirect()->route('getProject')->with('error', 'Project not found.');
-        }
-        $imagePath = public_path($project->filepath);
-        if (File::exists($imagePath)) {
-            File::delete($imagePath);
         }
         $deleted = $project->delete();
         if ($deleted) {
@@ -834,6 +805,54 @@ class DashboardController extends Controller
             return redirect()->route('getSuccess')->with('success', 'Success  Data deleted successfully.');
         } else {
             return redirect()->route('getSuccess')->with('error', 'Failed to delete Slider.');
+        }
+    }
+
+
+    // IDEOLOGY
+    public function getIdeology()
+    {
+
+        $ideology = Ideology::paginate(10);
+        return view('admin.ideology.index', compact('ideology'));
+    }
+    public function createIdeology()
+    {
+        return view('admin.ideology.create');
+    }
+    public function storeIdeology(Request $request)
+    {
+        $data = [
+            'title' => $request->title,
+        ];
+        Ideology::create($data);
+        return redirect()->route('getIdeology')->with('success', 'Ideology added successfully.');
+    }
+    public function editIdeology($id)
+    {
+        $ideology = Ideology::find($id);
+        return view('admin.ideology.edit', compact('ideology'));
+    }
+    public function updateIdeology(Request $request, $id)
+    {
+        $support = Ideology::findOrFail($id);
+        $data = [
+            'title' => $request->title,
+        ];
+        $support->update($data);
+        return redirect()->route('getIdeology')->with('success', 'Ideology updated successfully.');
+    }
+    public function deleteIdeology($id)
+    {
+        $ideology = Ideology::find($id);
+        if (!$ideology) {
+            return redirect()->route('getIdeology')->with('error', 'Ideology not found.');
+        }
+        $deleted = $ideology->delete();
+        if ($deleted) {
+            return redirect()->route('getIdeology')->with('success', 'Ideology deleted successfully.');
+        } else {
+            return redirect()->route('getProject')->with('error', 'Failed to delete Slider.');
         }
     }
 }

@@ -39,20 +39,20 @@
                                                 <span class="text-danger name"></span>
                                         </div>
                                     </div>
-                                    <div class="col-xl-6">
+                                    {{-- <div class="col-xl-6">
                                         <div class="form-group">
                                             <label class="form-label">Upload Image</label>
                                             <input type="file" name="images"   class="form-control"
                                                 placeholder="name" required>
                                                 <span class="text-danger name"></span>
                                         </div>
-                                    </div>
-                                    <div class="col-xl-6">
+                                    </div> --}}
+                                    {{-- <div class="col-xl-6">
                                         <div class="form-group">
                                             <label class="form-label">Discription</label>
                                             <textarea name="content" required></textarea>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
                                     <button  type="submit" class="btn btn-primary w-25 float-end">Save</button>
@@ -65,7 +65,7 @@
         </div>
     </div>
 </div>
-<script src="{{asset('admin/assets/js/jquery-3.7.1.js')}}"></script>
+{{-- <script src="{{asset('admin/assets/js/jquery-3.7.1.js')}}"></script> --}}
 {{-- <script>
     $(document).ready(function(){
         function fetchStates(country_id) {
@@ -100,9 +100,9 @@
     });
 
 </script> --}}
-<script>
+{{-- <script>
     CKEDITOR.replace('content');
-</script>
+</script> --}}
 <!--**********************************
     Content body end
 ***********************************-->

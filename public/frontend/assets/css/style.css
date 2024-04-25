@@ -156,7 +156,7 @@ body {
 .success {
   width: 100%;
   margin-top: 50px;
-  background-color: #051025;
+
 }
 
 .track-record {
@@ -220,7 +220,7 @@ body {
 }
 .navbar-collapse .nav-link {
   color: #fff;
-  border-radius: 20px;
+  /* border-radius: 20px; */
 }
 .navbar-collapse .nav-link:hover {
   background: #fff;
@@ -230,7 +230,7 @@ body {
 .navbar-collapse li.active {
   background: #ffffff;
   color: #051025 !important;
-  border-radius: 20px;
+  /* border-radius: 20px; */
 }
 .navbar-collapse li:hover .nav-link {
   background: #fff;
@@ -247,9 +247,14 @@ body {
 }
 
 .success{
-  width: 100%;
-  padding: 10px;
-  background: linear-gradient(to right, #051025 50%, #414346bf 50%);
+
+}
+.success-left{
+  background-color: #051025;
+}
+
+.success-right{
+  background-color: #fdbe33;
 }
 
 .complete-project{
@@ -267,6 +272,13 @@ body {
   font-size: 24px;
   color: white;
   text-align: center;
+}
+
+@media(max-width:480px){
+.servicedetail-left{
+  width: 100%;
+  margin-top: 10px;
+}
 }
 .contactus{
 
@@ -300,6 +312,7 @@ body {
   color: white;
 }
 
+
 .btnCOntact {
   padding: 0.6rem 1.3rem;
   background-color: #fff;
@@ -314,3 +327,15 @@ body {
   margin: 0;
   width: 100%;
 }
+
+@media(max-width:486px){
+  .contactus-mobile-address{
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .column-reverseOnphone{ flex-direction: column-reverse;}
+}
+
